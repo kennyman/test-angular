@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="BoFAdmin">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
@@ -122,27 +122,30 @@
                                     <th class="col-md-1">Visible</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="text-">
-                                    <td><img src="http://img.businessoffashion.com/50/50/magic/profiles/asset/182/184c41b5f921f6c4b3121deb6ea3bc8f8fc11bd9.jpeg"></td>
-                                    <td>Gianvito Rossi</td>
-                                    <td>Designer, Gianvito Rossi</td>
-                                    <td>Italy</td>
-                                    <td class="text-center"><i class="glyphicon glyphicon-ok text-color-green"></i></td>
-                                    <td class="text-center"><i class="glyphicon glyphicon-remove text-color-red"></i></td>
+                            <tbody ng-controller="Profiles">
+                                <tr class="text-" ng-repeat="profile in profiles">
+                                    <td><img src="http://img.businessoffashion.com/50/50/magic/{{ profile.thumbnail.file}}"></td>
+                                    <td>{{ profile.first_name }} {{ profile.last_name }}</td> 
+                                    <td>{{ profile.profile_sub_title }}</td>
+                                    <td>{{ profile.country_name }}</td>
+                                    <td class="text-center">
+                                        <i class="glyphicon" ng-class="profile.is_enabled == true ? 'glyphicon-ok text-color-green' : 'glyphicon-remove text-color-red'"></i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="glyphicon" ng-class="profile.is_visible == true ? 'glyphicon-ok text-color-green' : 'glyphicon-remove text-color-red'"></i>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-12">
-                        <ul class="pagination col-md-pull-5">
-                          <li><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                          <li><a href="#">4</a></li>
-                          <li><a href="#">5</a></li>
+                        <ul class="pagination col-md-pull-5" ng-controller="Profiles">
+                            <li ng-repeat="i in range">
+                                <a href="#">{{ i }}</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
